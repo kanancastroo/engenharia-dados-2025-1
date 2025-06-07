@@ -1,0 +1,22 @@
+docker network create eng-net
+
+cd postgres
+docker-compose up -d
+
+cd ../dbt_compose
+docker-compose up -d --build
+
+docker exec -it dbt bash
+
+dbt debug
+dbt run
+dbt test
+
+
+
+
+
+
+
+
+docker system prune -a --volumes --force

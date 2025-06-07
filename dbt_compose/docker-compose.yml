@@ -1,23 +1,19 @@
-version: '3.8'
-
 services:
-
   app:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./dbt/Dockerfile
     container_name: dbt
-    depends_on:
-      - db
     environment:
       DBT_PROFILES_DIR: /root/.dbt
     volumes:
-      - .:/usr/app
+      - ./dbt/projeto_dbt_maua:/usr/app
+      - ./dbt/projeto_dbt_maua/profiles.yml:/root/.dbt/profiles.yml
     working_dir: /usr/app
-    command: tail -f /dev/null  # Mantém o container rodando para você entrar com `docker exec`
+    command: tail -f /dev/null
     networks:
       - eng-net
 
 networks:
   eng-net:
-    driver: bridge
+    external: true

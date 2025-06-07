@@ -1,0 +1,12 @@
+eng_dados_maua:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: dbpg
+      user: postgres
+      password: postgres
+      port: 5432
+      dbname: warehouse
+      schema: public
+      threads: 1
