@@ -22,8 +22,8 @@ CREATE TABLE produtos (
 
 CREATE TABLE compras (
     id SERIAL PRIMARY KEY,
-    cliente_id INT REFERENCES clientes(id),
-    produto_id INT REFERENCES produtos(id),
+    id_cliente INT REFERENCES clientes(id),
+    id_produto INT REFERENCES produtos(id),
     data_compra DATE,
     quantidade INT,
     valor_final NUMERIC(10, 2)
@@ -73,7 +73,7 @@ INSERT INTO produtos (nome, preco, mercado) VALUES
 ('Fralda Infantil (P)', 39.90, 'Farmácia Popular');
 
 
-INSERT INTO compras (cliente_id, produto_id, data_compra, quantidade, valor_final) VALUES
+INSERT INTO compras (id_cliente, id_produto, data_compra, quantidade, valor_final) VALUES
 (1, 1, '2025-06-01', 2, 51.80),
 (2, 4, '2025-06-01', 1, 7.49),
 (3, 6, '2025-06-02', 2, 25.50),
@@ -84,3 +84,5 @@ INSERT INTO compras (cliente_id, produto_id, data_compra, quantidade, valor_fina
 (8, 13, '2025-06-04', 6, 15.00),
 (9, 15, '2025-06-05', 1, 11.90),
 (10, 18, '2025-06-05', 2, 7.70);
+
+CREATE TABLE _init_marcador (id INT);

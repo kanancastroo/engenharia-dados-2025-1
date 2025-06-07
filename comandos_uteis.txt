@@ -20,3 +20,8 @@ dbt test
 
 
 docker system prune -a --volumes --force
+
+
+
+docker exec -it dbpg psql -U postgres -d warehouse
+\dt public.*

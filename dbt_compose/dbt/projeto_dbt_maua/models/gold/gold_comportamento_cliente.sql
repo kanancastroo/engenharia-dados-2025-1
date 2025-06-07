@@ -10,7 +10,7 @@ gastos AS (
         COUNT(*) AS total_compras,
         SUM(p.preco) AS valor_total_gasto
     FROM compras c
-    JOIN produtos p ON c.id_produto = p.id_produto
+    JOIN produtos p ON c.id_produto = p.id
     GROUP BY c.id_cliente
 ),
 mais_comprado AS (
@@ -31,7 +31,7 @@ produto_top AS (
         r.id_cliente,
         p.nome AS produto_mais_comprado
     FROM ranked r
-    JOIN produtos p ON r.id_produto = p.id_produto
+    JOIN produtos p ON r.id_produto = p.id
     WHERE r.rn = 1
 )
 SELECT 

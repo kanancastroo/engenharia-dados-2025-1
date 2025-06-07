@@ -1,1 +1,3 @@
-SELECT * FROM {{ ref('compras') }}
+{{ config(materialized='view') }}
+
+SELECT * FROM {{ ref('compras_model') }}

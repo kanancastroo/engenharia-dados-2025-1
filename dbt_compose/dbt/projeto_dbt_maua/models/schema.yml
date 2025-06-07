@@ -1,8 +1,20 @@
 version: 2
 
+sources:
+  - name: public
+    schema: public
+    tables:
+      - name: clientes
+      - name: compras
+      - name: produtos
+
 models:
-  - name: bronze_cliente
-    description: "Tabela com os dados brutos dos clientes, carregados diretamente do CSV."
+  - name: clientes_model
+  - name: compras_model
+  - name: produtos_model
+
+  - name: bronze_clientes
+    description: "Tabela com os dados brutos dos clientes, carregados diretamente do banco."
     columns:
       - name: id_cliente
         description: "Identificador único do cliente"
