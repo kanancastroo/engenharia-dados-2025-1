@@ -1,53 +1,66 @@
+version: 2
+
 models:
-  - name: clientes
-    enabled: true
-    materialized: table
-    description: "Tabela de clientes"
+  - name: bronze_cliente
+    description: "Tabela com os dados brutos dos clientes, carregados diretamente do CSV."
     columns:
       - name: id_cliente
-        description: "ID do cliente"
-        tests:
-          - unique
-          - not_null
-      - name: nome_completo
+        description: "Identificador único do cliente"
+      - name: nome
         description: "Nome completo do cliente"
-        tests:
-          - not_null
-      - name: primeiro_pedido
-        description: "Primeiro pedido do cliente"
-      - name: pedido_mais_recente
-        description: "Pedido mais recente do cliente"
-      - name: pagamento_total
-        description: "Valor total do pagamento do cliente"
+      - name: email
+        description: "Email do cliente"
+      - name: telefone
+        description: "Telefone informado"
+      - name: cpf
+        description: "CPF do cliente"
+      - name: endereco
+        description: "Endereço completo"
+      - name: data_cadastro
+        description: "Data e hora do cadastro do cliente"
 
-
-  - name: pedidos
-    enabled: true
-    materialized: table
-    description: "Tabela de pedidos"
+  - name: bronze_compras
+    description: "Tabela com os dados brutos de compras realizadas pelos clientes."
     columns:
-      - name: id_pedido
-        description: "ID do pedido"
-        tests:
-          - unique
-          - not_null
+      - name: id_compra
+        description: "Identificador da compra"
       - name: id_cliente
-        description: "ID do cliente que fez o pedido"
-        tests:
-          - not_null
-      - name: data_pedido
-        description: "Data do pedido"
-        tests:
-          - not_null
-      - name: status
-        description: "Status do pedido (ex: 'pending', 'completed', 'cancelled')"
-        tests:
-          - not_null
-      - name: credit_card_amount
-        description: Amount of the order (BRL) paid for by credit card
-      - name: coupon_amount
-        description: Amount of the order (BRL) paid for by coupon
-      - name: bank_transfer_amount
-        description: Amount of the order (BRL) paid for by bank transfer
-      - name: gift_card_amount
-        description: Amount of the order (BRL) paid for by gift card
+        description: "Chave estrangeira para o cliente"
+      - name: id_produto
+        description: "Chave estrangeira para o produto"
+      - name: data_compra
+        description: "Data da compra"
+
+  - name: bronze_produtos
+    description: "Tabela com os dados brutos dos produtos disponíveis."
+    columns:
+      - name: id_produto
+        description: "Identificador único do produto"
+      - name: nome
+        description: "Nome do produto"
+      - name: preco
+        description: "Preço unitário do produto"
+
+  - name: silver_cliente
+    description: "Tabela tratada dos clientes, com remoção de dados sensíveis e transformação da data."
+    columns:
+      - name: id_cliente
+        description: "Identificador único do cliente"
+      - name: nome
+        description: "Nome do cliente"
+      - name: email
+        description: "Email do cliente"
+      - name: data_cadastro
+        description: "Data (sem hora) do cadastro do cliente"
+
+  - name: gold_comportamento_cliente
+    description: "Agregações sobre comportamento de compra por cliente: total de compras, gasto total e produto mais comprado."
+    columns:
+      - name: id_cliente
+        description: "Identificador do cliente"
+      - name: total_compras
+        description: "Número total de compras realizadas pelo cliente"
+      - name: valor_total_gasto
+        description: "Soma total gasta pelo cliente"
+      - name: produto_mais_comprado
+        description: "Produto mais comprado pelo cliente"

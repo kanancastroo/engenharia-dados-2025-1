@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dbt
+    depends_on:
+      - db
+    environment:
+      DBT_PROFILES_DIR: /root/.dbt
+    volumes:
+      - .:/usr/app
+    working_dir: /usr/app
+    command: tail -f /dev/null  # Mantém o container rodando para você entrar com `docker exec`
+    networks:
+      - eng-net
+
+networks:
+  eng-net:
+    driver: bridge
