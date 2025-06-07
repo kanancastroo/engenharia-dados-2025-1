@@ -1,36 +1,21 @@
-# Engenharia de dados - 2025-1
+# Engenharia de dados - 2025
 
-# Containers
-## dbt_compose e dbt
+## Nomes e RA
 
-### Nosso container de postgresql
-- app
-    - postgresql
-    - cliente simples
+- Kanan Castro | RA:24.85660-1
+- Mariana Martins | RA: 24.85833-4
+- Vinicius Oliveira| 24.85547-0
 
-### Nosso container do dbt
-- dbt
-    - dbt-core
-    - dbt-postgresl
+----/----
 
-# Estrutura de diretórios e arquivos
-## Arquivos do app
-- app
-    - .env
-    - Dockerfile
-    - requirements.txt
-    - script.py
+## Como rodar essa aplicação:
 
-## Arquivos do dbt
-- dbt_compose
-    - app
-    - dbt
-        - .dbt
-            - profiles.yaml
-    - Dockerfile
+- Entrar na raíz do projeto e roda essa sequencia aqui:
 
-## Nossa receita docker compose
-- Compose.yaml
+```docker-compose up -d --build```
 
+```docker exec -it dbt bash```
 
-
+```dbt debug```
+```dbt run```
+```dbt test```
